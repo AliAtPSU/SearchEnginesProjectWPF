@@ -56,7 +56,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="VectorSpace\Centroid.cs" />
     <Compile Include="VectorSpace\Corpus.cs" />
     <Compile Include="VectorSpace\Document.cs" />
     <Compile Include="VectorSpace\Vector.cs" />
