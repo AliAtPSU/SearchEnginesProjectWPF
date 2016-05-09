@@ -25,8 +25,13 @@ namespace SearchEnginesProjectWPF
         static Stopwatch timeToUpdate = new Stopwatch();
         static ThreadStart crawlSite = new ThreadStart(Crawler.CrawlSite);
         static Thread crawlThread = new Thread(crawlSite);
+        static ThreadStart switchPage = new ThreadStart(switchPageList);
+        static Thread switchPageThread = new Thread(switchPage);
         public MainWindow()
         {
+            crawlThread.Start();
+            timeToUpdate.Start();
+            switchPageThread.Start();
             InitializeComponent();
         }
 
@@ -40,6 +45,7 @@ namespace SearchEnginesProjectWPF
                     Crawler.Clean();
                     crawlSite = new ThreadStart(Crawler.CrawlSite);
                     crawlThread = new Thread(crawlSite);
+                    timeToUpdate.Restart();
                 }
             }
         }

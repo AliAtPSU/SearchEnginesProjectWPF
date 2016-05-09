@@ -4,7 +4,6 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace CSharpCrawler
 {
@@ -19,8 +18,8 @@ namespace CSharpCrawler
         private static List<string> _exceptions = new List<string>();
         private static List<string> _classes = new List<string>();
         private static StringBuilder _logBuffer = new StringBuilder();
-        static BigInteger pageNumber = 1;
-        static File pages = new File();
+        //static BigInteger pageNumber = 1;
+        //static File pages = new File();
 
         #endregion
 
@@ -39,7 +38,7 @@ namespace CSharpCrawler
 
             WriteReportToDisk(sb.ToString());
 
-            OpenReportInIE();
+            //OpenReportInIE();
 
             Console.WriteLine("Finished crawl.");
 
@@ -442,7 +441,7 @@ namespace CSharpCrawler
             return sb;
         }
 
-        private static void OpenReportInIE()
+       /* private static void OpenReportInIE()
         {
             object o = new object();
             InternetExplorer ie = new InternetExplorerClass();
@@ -450,7 +449,7 @@ namespace CSharpCrawler
             wb.Visible = true;
 
             wb.Navigate(ConfigurationManager.AppSettings["logTextFileName"].ToString(), ref o, ref o, ref o, ref o);
-        }
+        }*/
 
         #endregion
     }

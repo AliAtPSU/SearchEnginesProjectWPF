@@ -56,6 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="VectorSpace\Centroid.cs" />
+    <Compile Include="VectorSpace\Corpus.cs" />
+    <Compile Include="VectorSpace\Document.cs" />
+    <Compile Include="VectorSpace\Vector.cs" />
+    <Compile Include="VectorSpace\VectorSpaceModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,7 +73,6 @@
     <Compile Include="Crawler\CSSClassParser.cs" />
     <Compile Include="Crawler\LinkParser.cs" />
     <Compile Include="Crawler\Page.cs" />
-    <Compile Include="Crawler\Program.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
