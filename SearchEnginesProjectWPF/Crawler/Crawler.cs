@@ -5,8 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using SHDocVw;
-using System.Numerics;
+
 namespace CSharpCrawler
 {
     public static class Crawler
@@ -46,7 +45,17 @@ namespace CSharpCrawler
 
         }
 
+        public static void Clean()
+        {
+            _pages = new List<Page>();
+            _externalUrls = new List<string>();
+            _otherUrls = new List<string>();
+            _failedUrls = new List<string>();
+            _exceptions = new List<string>();
+            _classes = new List<string>();
+            _logBuffer = new StringBuilder();
 
+        }
 
 
         /// <summary>
