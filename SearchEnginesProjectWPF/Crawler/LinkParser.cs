@@ -68,7 +68,7 @@ namespace CSharpCrawler
         /// </summary>
         /// <param name="page">The page whose text is to be parsed.</param>
         /// <param name="sourceUrl">The source url of the page.</param>
-        public void ParseLinks(Page page, string sourceUrl)
+        public void ParseLinks(VectorSpaceModel.Components.Document page, string sourceUrl)
         {
             MatchCollection matches = Regex.Matches(page.Text, _LINK_REGEX);
 

@@ -11,7 +11,7 @@ namespace CSharpCrawler
     {
         #region Private Fields
 
-        private static List<Page> _pages = new List<Page>();
+        private static List<VectorSpaceModel.Components.Document> _pages = new List<VectorSpaceModel.Components.Document>();
         private static List<string> _externalUrls = new List<string>();
         private static List<string> _otherUrls = new List<string>();
         private static List<string> _failedUrls = new List<string>();
@@ -46,7 +46,7 @@ namespace CSharpCrawler
 
         public static void Clean()
         {
-            _pages = new List<Page>();
+            _pages = new List<VectorSpaceModel.Components.Document>();
             _externalUrls = new List<string>();
             _otherUrls = new List<string>();
             _failedUrls = new List<string>();
@@ -67,7 +67,7 @@ namespace CSharpCrawler
             {
                 string htmlText = GetWebText(url);
 
-                Page page = new Page();
+                VectorSpaceModel.Components.Document page = new VectorSpaceModel.Components.Document();
                 page.Text = htmlText;
                 page.Url = url;
                 page.CalculateViewstateSize();
@@ -192,7 +192,7 @@ namespace CSharpCrawler
         /// <returns>Boolean indicating whether or not the page has been crawled.</returns>
         private static bool PageHasBeenCrawled(string url)
         {
-            foreach (Page page in _pages)
+            foreach (VectorSpaceModel.Components.Document page in _pages)
             {
                 if (page.Url == url)
                     return true;
@@ -284,7 +284,7 @@ namespace CSharpCrawler
 
             sb.Append("<table><tr><th>Page Size</th><th>Viewstate Size</th><th>Url</th></tr>");
 
-            foreach (Page page in _pages)
+            foreach (VectorSpaceModel.Components.Document page in _pages)
             {
                 sb.Append("<tr><td>");
                 sb.Append(page.Size.ToString());
@@ -303,8 +303,8 @@ namespace CSharpCrawler
 
             sb.Append("<table><tr><th>Page Size</th><th>Viewstate Size</th><th>Url</th></tr>");
 
-            List<Page> sortedList = new List<Page>();
-            foreach (Page page in _pages)
+            List<VectorSpaceModel.Components.Document> sortedList = new List<VectorSpaceModel.Components.Document>();
+            foreach (VectorSpaceModel.Components.Document page in _pages)
             {
                 if (sortedList.Count == 0)
                 {
@@ -314,7 +314,7 @@ namespace CSharpCrawler
                 {
                     for (int i = 0; i <= sortedList.Count - 1; i++)
                     {
-                        Page sortedPage = sortedList[i];
+                        VectorSpaceModel.Components.Document sortedPage = sortedList[i];
 
                         if (sortedPage.Size > page.Size)
                         {
@@ -332,7 +332,7 @@ namespace CSharpCrawler
 
             for (int i = sortedList.Count - 1; i >= 0; i--)
             {
-                Page page = sortedList[i];
+                VectorSpaceModel.Components.Document page = sortedList[i];
 
                 sb.Append("<tr><td>");
                 sb.Append(page.Size.ToString());

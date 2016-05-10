@@ -25,7 +25,7 @@ namespace VectorSpaceModel.Components
             get { return _size; }
         }
 
-        public string Text
+ /*       public string Text
         {
             get { return _text; }
             set
@@ -33,7 +33,7 @@ namespace VectorSpaceModel.Components
                 _text = value;
                 _size = value.Length;
             }
-        }
+        }*/
 
         public string Url
         {
@@ -174,10 +174,10 @@ namespace VectorSpaceModel.Components
 
     
 
-        public Document(string id, params string[] terms)
+        public Document(string url, params string[] terms)
             : this(terms)
         {
-            ID = id;
+            Url = url;
         }
 
         public Document(params string[] terms)
@@ -211,7 +211,7 @@ namespace VectorSpaceModel.Components
 
         }
 
-        public string ID { get; private set; }
+//        public string ID { get; private set; }
 
         public int Count
         {
@@ -227,19 +227,19 @@ namespace VectorSpaceModel.Components
         
         public override string ToString()
         {
-            return string.Format("ID: {0}, Terms: [{1}]", ID,
+            return string.Format("ID: {0}, Terms: [{1}]", Url,
                 string.Join(",", _terms.Select(term => term.ToString()).ToArray()));
         }
 
 
         public void CalculateViewstateSize()
         {
-            int startingIndex = Text.IndexOf("id=\"__VIEWSTATE\"");
+            int startingIndex = _text.IndexOf("id=\"__VIEWSTATE\"");
             if (startingIndex > -1)
             {
-                int indexOfViewstateValueNode = Text.IndexOf("value=\"", startingIndex);
-                int indexOfClosingQuotationMark = Text.IndexOf("\"", indexOfViewstateValueNode + 7);
-                string viewstateValue = Text.Substring(indexOfViewstateValueNode + 7, indexOfClosingQuotationMark - (indexOfViewstateValueNode + 7));
+                int indexOfViewstateValueNode = _text.IndexOf("value=\"", startingIndex);
+                int indexOfClosingQuotationMark = _text.IndexOf("\"", indexOfViewstateValueNode + 7);
+                string viewstateValue = _text.Substring(indexOfViewstateValueNode + 7, indexOfClosingQuotationMark - (indexOfViewstateValueNode + 7));
 
                 ViewstateSize = viewstateValue.Length;
             }

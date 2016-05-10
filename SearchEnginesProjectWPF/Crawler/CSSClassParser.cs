@@ -38,7 +38,7 @@ namespace CSharpCrawler
         /// Parses the page looking for css classes that are in use.
         /// </summary>
         /// <param name="page">The page to parse.</param>
-        public void ParseForCssClasses(Page page)
+        public void ParseForCssClasses(VectorSpaceModel.Components.Document page)
         {
             MatchCollection matches = Regex.Matches(page.Text, _CSS_CLASS_REGEX);
 

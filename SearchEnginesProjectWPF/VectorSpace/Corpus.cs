@@ -33,6 +33,22 @@ namespace VectorSpaceModel.Components
                 CalculateInverseDocumentFrequency();
             }
         }
+        public void addDocument(Document document, bool calculateIDF)
+        {
+            foreach (Document d in _documents)
+            {
+                if (d.Url.Equals(document.Url, StringComparison.InvariantCultureIgnoreCase)) ;
+                {
+                    return;
+                }
+            }
+            _documents.Add(document);
+            _vocabulary = _documents.SelectMany(term => term).Distinct(StringComparer.InvariantCultureIgnoreCase).ToList();
+            if (calculateIDF)
+            {
+                CalculateInverseDocumentFrequency();
+            }
+        }
 
 
         public IList<Document> Documents
@@ -65,24 +81,6 @@ namespace VectorSpaceModel.Components
             return _invertedDocumentFrequency[index];
         }
 
-        internal List<Centroid> calculateCentroids()
-        {
-            List<Centroid> toReturn = new List<Centroid>();
-            toReturn.Add(calculateCentroid(AssignmentSE.Category.Politics));
-            toReturn.Add(calculateCentroid(AssignmentSE.Category.Sports));
-            toReturn.Add(calculateCentroid(AssignmentSE.Category.Economy));
-            toReturn.Add(calculateCentroid(AssignmentSE.Category.Technology));
-            return toReturn;
-        }
 
-        Centroid calculateCentroid(AssignmentSE.Category category)
-        {
-            List<string> listOfAllTerms = new List<string>();
-            foreach (Document document in _documents)
-            {
-                listOfAllTerms.AddRange(document._terms);
-            }
-            return new Centroid(category, listOfAllTerms.ToArray());
-        }
     }
 }
