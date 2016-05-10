@@ -14,7 +14,40 @@ namespace VectorSpaceModel.Components
         public IDictionary<string, int> _regularFrequency = new Dictionary<string, int>();
         public IList<string> _terms;
         private double? _maxFrequency;
-        public AssignmentSE.Category category;
+
+        private int _size;
+        private string _text;
+        private string _url;
+        private int _viewstateSize;
+
+        public int Size
+        {
+            get { return _size; }
+        }
+
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                _size = value.Length;
+            }
+        }
+
+        public string Url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
+
+        public int ViewstateSize
+        {
+            get { return _viewstateSize; }
+            set { _viewstateSize = value; }
+        }
+
+
 
         public IEnumerator<string> GetEnumerator()
         {
@@ -26,7 +59,7 @@ namespace VectorSpaceModel.Components
             return GetEnumerator();
         }
 
-        public double BooleanSimilarity(Vector query, IList<Vector> corpus)
+        public double BooleanSimilarity(Document query, IList<Document> corpus)
         {
             List<string> vocabulary = corpus.SelectMany(term => term).Distinct().ToList();
 
@@ -38,7 +71,7 @@ namespace VectorSpaceModel.Components
             return vectorSpaceModel.CalculateCosineSimilarity();
         }
 
-        public double AugumentedSimilarity(Vector query, IList<Vector> corpus)
+        public double AugumentedSimilarity(Document query, IList<Document> corpus)
         {
             List<string> vocabulary = corpus.SelectMany(term => term).Distinct().ToList();
 
@@ -50,7 +83,7 @@ namespace VectorSpaceModel.Components
             return vectorSpaceModel.CalculateCosineSimilarity();
         }
 
-        public double TFIDFSimilarity(Vector query, Corpus corpus)
+        public double TFIDFSimilarity(Document query, Corpus corpus)
         {
             double[] queryWeights = corpus.Select(term => query.TFIDF(term, corpus)).ToArray();
             double[] documentWeights = corpus.Select(term => TFIDF(term, corpus)).ToArray();
@@ -60,7 +93,7 @@ namespace VectorSpaceModel.Components
             return vectorSpaceModel.CalculateCosineSimilarity();
         }
 
-        public double BooleanTFIDFSimilarity(Vector query, Corpus corpus)
+        public double BooleanTFIDFSimilarity(Document query, Corpus corpus)
         {
             double[] queryWeights =
                 corpus.Select(term => query.TFIDF(term, corpus, query.BooleanTermFrequency)).ToArray();
@@ -140,11 +173,6 @@ namespace VectorSpaceModel.Components
 
 
     
-    public Document(string id, AssignmentSE.Category category ,params string[] terms)
-            : this(id,terms)
-        {
-            this.category = category;
-        }
 
         public Document(string id, params string[] terms)
             : this(terms)
@@ -201,6 +229,20 @@ namespace VectorSpaceModel.Components
         {
             return string.Format("ID: {0}, Terms: [{1}]", ID,
                 string.Join(",", _terms.Select(term => term.ToString()).ToArray()));
+        }
+
+
+        public void CalculateViewstateSize()
+        {
+            int startingIndex = Text.IndexOf("id=\"__VIEWSTATE\"");
+            if (startingIndex > -1)
+            {
+                int indexOfViewstateValueNode = Text.IndexOf("value=\"", startingIndex);
+                int indexOfClosingQuotationMark = Text.IndexOf("\"", indexOfViewstateValueNode + 7);
+                string viewstateValue = Text.Substring(indexOfViewstateValueNode + 7, indexOfClosingQuotationMark - (indexOfViewstateValueNode + 7));
+
+                ViewstateSize = viewstateValue.Length;
+            }
         }
     }
 }
