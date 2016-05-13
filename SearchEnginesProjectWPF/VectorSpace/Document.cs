@@ -13,6 +13,7 @@ namespace VectorSpaceModel.Components
         protected readonly IDictionary<string, double> _logaritmicFrequency = new Dictionary<string, double>();
         public IDictionary<string, int> _regularFrequency = new Dictionary<string, int>();
         public IList<string> _terms;
+        public string pageTitle;
         private double? _maxFrequency;
 
         private int _size;

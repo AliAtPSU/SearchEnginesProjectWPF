@@ -33,18 +33,13 @@ namespace SearchEnginesProjectWPF
         static int pages = 0;
         public MainWindow()
         {
-            // crawlThread.Start();
-            //timeToUpdate.Start();
-            //switchPageThread.Start();
+            crawlThread.Start();
+            timeToUpdate.Start();
+            switchPageThread.Start();
             InitializeComponent();
-            Run test = new Run("test");
-            Hyperlink testH = new Hyperlink(test);
-            testH.NavigateUri = new System.Uri("http://psu.edu.sa");
-            testH.Click += new RoutedEventHandler(DynamicClick);
-            ResultsLabel.Content = testH;
 
         }
-        public void DynamicClick(object sender, RoutedEventArgs e)
+        public void OpenPageOnClick(object sender, RoutedEventArgs e)
         {
             Hyperlink test = (Hyperlink)sender;
             //Console.WriteLine(test.NavigateUri.AbsolutePath);
@@ -91,9 +86,10 @@ namespace SearchEnginesProjectWPF
         {
             for (int i = (page - 1) * 10; i < page * 10; i++)
             {
-                /*   Run link = new Run()
-                   Hyperlink hl = new Hyperlink("hello");
-                   ResultsLabel.Content = hl;*/
+                Run link = new Run(i+". "+documentsAndDistances.ElementAt(i).Key.pageTitle);
+                Hyperlink linkToWebPage = new Hyperlink(link);
+                linkToWebPage.NavigateUri = new Uri(documentsAndDistances.ElementAt(i).Key.Url);
+                linkToWebPage.Click += new RoutedEventHandler(OpenPageOnClick);
             }
         }
 
