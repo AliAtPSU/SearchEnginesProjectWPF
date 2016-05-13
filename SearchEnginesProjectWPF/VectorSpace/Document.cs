@@ -16,7 +16,7 @@ namespace VectorSpaceModel.Components
         private double? _maxFrequency;
 
         private int _size;
-        private string _text;
+        //private string _text;
         private string _url;
         private int _viewstateSize;
 
@@ -25,15 +25,11 @@ namespace VectorSpaceModel.Components
             get { return _size; }
         }
 
- /*       public string Text
+        public string Text
         {
-            get { return _text; }
-            set
-            {
-                _text = value;
-                _size = value.Length;
-            }
-        }*/
+            get { return string.Join(" ",_terms); }
+            
+        }
 
         public string Url
         {
@@ -234,6 +230,7 @@ namespace VectorSpaceModel.Components
 
         public void CalculateViewstateSize()
         {
+            string _text = string.Join(" ", _terms.ToArray());
             int startingIndex = _text.IndexOf("id=\"__VIEWSTATE\"");
             if (startingIndex > -1)
             {

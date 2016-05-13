@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid Background="#FFC7BFBF">
-        <TextBox x:Name="QueryBox" HorizontalAlignment="Left" Height="23" Margin="39,47,0,0" TextWrapping="Wrap" Text="Enter query here" VerticalAlignment="Top" Width="249"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="340,46,0,0"/>
+        <TextBox x:Name="queryBox" HorizontalAlignment="Left" Height="23" Margin="39,47,0,0" TextWrapping="Wrap" Text="Enter query here" VerticalAlignment="Top" Width="249"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="340,46,0,0" Click="SearchButton_Click"/>
         <Label x:Name="ResultsLabel" Content="Label" HorizontalAlignment="Left" Margin="39,117,0,0" VerticalAlignment="Top" Height="162" Width="441" RenderTransformOrigin="0.502,0.496" Background="#FFFDFDFD"/>
+        <ComboBox x:Name="pageList" HorizontalAlignment="Left" Margin="360,287,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="pageList_SelectionChanged"/>
 
     </Grid>
 </Window>

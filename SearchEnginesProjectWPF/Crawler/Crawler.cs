@@ -4,14 +4,14 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Text;
-
+using System.Linq;
 namespace CSharpCrawler
 {
     public static class Crawler
     {
         #region Private Fields
 
-        private static List<VectorSpaceModel.Components.Document> _pages = new List<VectorSpaceModel.Components.Document>();
+        public static List<VectorSpaceModel.Components.Document> _pages = new List<VectorSpaceModel.Components.Document>();
         private static List<string> _externalUrls = new List<string>();
         private static List<string> _otherUrls = new List<string>();
         private static List<string> _failedUrls = new List<string>();
@@ -68,7 +68,7 @@ namespace CSharpCrawler
                 string htmlText = GetWebText(url);
 
                 VectorSpaceModel.Components.Document page = new VectorSpaceModel.Components.Document();
-                page.Text = htmlText;
+                page._terms = htmlText.Split(' ').ToList();
                 page.Url = url;
                 page.CalculateViewstateSize();
                 
